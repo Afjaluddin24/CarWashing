@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NAS Car Wash | Premium Mobile Detailers</title>
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+
+  <style>
+    :root {
+      /* Colors extracted exactly from the NAS logo provided */
+      --nas-blue: #0b3d71; 
+      --nas-red: #da1f26;
+      --nas-light: #f8f9fa;
+      --nas-dark: #051c35;
+      --nav-height: 90px;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; background: #fff; color: #222; overflow-x: hidden; line-height: 1.6; }
+    h1,h2,h3,h4,h5 { font-family: 'Montserrat', sans-serif; }
+    
+    section { padding: 80px 0; }
+
+    /* ===== NAVBAR ===== */
+    #mainNav {
+      background: #ffffff; /* Logo looks best on white or very dark backgrounds */
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      position: fixed; top:0; width:100%; z-index:1050;
+      min-height: var(--nav-height);
+      display: flex; align-items: center;
+      transition: 0.3s all ease-in-out;
+    }
+    
+    .navbar-brand img {
+      height: 60px; /* Adjusted for the NAS logo proportions */
+      width: auto;
+      transition: 0.3s;
+    }
+
+    .nav-link {
+      color: var(--nas-blue) !important;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin: 0 10px; transition: 0.3s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--nas-red) !important; }
+
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        background: #fff;
+        position: absolute; top: var(--nav-height); left: 0; width: 100%;
+        padding: 20px; border-top: 3px solid var(--nas-red);
+      }
+    }
+
+    /* ===== HERO SECTION ===== */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: linear-gradient(rgba(5, 28, 53, 0.8), rgba(5, 28, 53, 0.8)), 
+                  url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=1920&auto=format&fit=crop');
+      background-size: cover; background-position: center;
+      padding-top: var(--nav-height);
+      color: #fff; text-align: center;
+    }
+    .hero-title { 
+      font-size: clamp(2.2rem, 8vw, 4.5rem); 
+      font-weight: 900; line-height: 1.1; 
+    }
+    .hero-title span { color: var(--nas-red); }
+    
+    .btn-nas { background: var(--nas-red); color: #fff; padding: 14px 35px; border-radius: 4px; font-weight: 700; border: none; transition: 0.3s; }
+    .btn-nas:hover { background: var(--nas-blue); color: #fff; transform: translateY(-3px); }
+
+    /* ===== UTILITIES ===== */
+    .section-title { font-weight: 900; text-align: center; color: var(--nas-blue); font-size: 2.2rem; }
+    .section-title span { color: var(--nas-red); }
+    .section-line { width: 50px; height: 4px; background: var(--nas-red); margin: 15px auto 45px; }
+
+    .service-card {
+      background: #fff; padding: 40px 30px; border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05); height: 100%;
+      transition: 0.3s; text-align: center; border-top: 4px solid var(--nas-blue);
+    }
+    .service-card:hover { transform: translateY(-10px); border-top-color: var(--nas-red); }
+    .icon-box { font-size: 2.5rem; color: var(--nas-blue); margin-bottom: 20px; }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--nas-light); }
+    .about-img { border-radius: 10px; border-left: 8px solid var(--nas-red); width: 100%; }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--nas-dark); color: #fff; padding: 60px 0 0; }
+    .footer-logo { height: 50px; filter: brightness(0) invert(1); margin-bottom: 20px; }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+    .footer-links a:hover { color: var(--nas-red); }
+    .footer-bottom { background: rgba(0,0,0,0.3); padding: 20px 0; margin-top: 50px; font-size: 0.8rem; }
+
+    #backTop {
+      position:fixed; bottom:30px; right:30px; width:45px; height:45px;
+      background:var(--nas-blue); color:#fff; border:none; border-radius:4px;
+      display:none; align-items:center; justify-content:center; cursor:pointer; z-index:1000;
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav">
+
+<!-- NAVIGATION -->
+<nav id="mainNav" class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <!-- Path to your logo image -->
+      <img src="Logo.png" alt="NAS Group Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link btn-nas ms-lg-3 text-white py-2" href="#contact">Book Now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="fade-up">
+      <div class="col-lg-10">
+        <h1 class="hero-title">NAS GROUP <span>MIDDLE EAST</span></h1>
+        <p class="lead mb-5 px-md-5">Premium Mobile Detailing & Car Care Solutions. We bring the showroom quality to your driveway.</p>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+          <a href="#services" class="btn btn-nas">Our Services</a>
+          <a href="#about" class="btn btn-outline-light px-5 py-3 fw-bold">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+        <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=800&auto=format&fit=crop" alt="Car Detail" class="img-fluid about-img">
+      </div>
+      <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
+        <h2 class="section-title text-start">Experience <span>Excellence</span></h2>
+        <div class="section-line ms-0"></div>
+        <p class="mb-4">As a part of <strong>NAS Group Middle East</strong>, we uphold the highest standards of professional car care. Our mobile units are fully equipped with state-of-the-art technology to provide a "nas-tastic" finish every time.</p>
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center mb-2"><i class="fas fa-certificate text-danger me-2"></i><span>NAS Certified</span></div>
+            <div class="d-flex align-items-center mb-2"><i class="fas fa-droplet text-danger me-2"></i><span>Eco-Friendly Tech</span></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex align-items-center mb-2"><i class="fas fa-clock text-danger me-2"></i><span>On-Time Service</span></div>
+            <div class="d-flex align-items-center mb-2"><i class="fas fa-shield-halved text-danger me-2"></i><span>Premium Protection</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services">
+  <div class="container">
+    <h2 class="section-title">NAS <span>Detailing Packages</span></h2>
+    <div class="section-line"></div>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="service-card">
+          <div class="icon-box"><i class="fas fa-car"></i></div>
+          <h4 class="fw-bold">Executive Wash</h4>
+          <p class="text-muted">Exterior foam wash, wheel cleaning, and basic interior vacuuming.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card">
+          <div class="icon-box"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <h4 class="fw-bold">Full Detailing</h4>
+          <p class="text-muted">Deep steam cleaning, leather conditioning, and machine polish.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card">
+          <div class="icon-box"><i class="fas fa-gem"></i></div>
+          <h4 class="fw-bold">Ceramic Shield</h4>
+          <p class="text-muted">High-grade nano-ceramic coating for long-lasting paint protection.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4 col-md-6">
+        <img src="Logo.png" class="footer-logo" alt="NAS Group">
+        <p class="text-white-50">Leading the way in premium mobile car care across the Middle East. Convenience meets quality.</p>
+      </div>
+      <div class="col-lg-2 col-6 ms-auto">
+        <h5 class="mb-4">Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h5 class="mb-4">Contact Us</h5>
+        <p class="small text-white-50"><i class="fas fa-phone me-2"></i> +971 (0) 000 0000</p>
+        <p class="small text-white-50"><i class="fas fa-envelope me-2"></i> info@nasgroupme.com</p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom text-center">
+    <div class="container">
+      &copy; 2026 NAS Group Middle East. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<button id="backTop"><i class="fas fa-chevron-up"></i></button>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  $(document).ready(function(){
+    AOS.init({ duration: 800, once: true });
+
+    $(window).scroll(function(){
+      if($(this).scrollTop() > 50) {
+        $('#mainNav').css('min-height', '70px').css('box-shadow', '0 5px 20px rgba(0,0,0,0.1)');
+        $('.navbar-brand img').css('height', '50px');
+        $('#backTop').fadeIn();
+      } else {
+        $('#mainNav').css('min-height', '90px').css('box-shadow', 'none');
+        $('.navbar-brand img').css('height', '60px');
+        $('#backTop').fadeOut();
+      }
+    });
+
+    $('#backTop').click(function(){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+</script>
+</body> 
+</html>
