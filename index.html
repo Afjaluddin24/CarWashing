@@ -67,7 +67,7 @@
     .hero-title { font-size: clamp(2.2rem, 8vw, 4.5rem); font-weight: 900; }
     .hero-title span { color: var(--nas-red); }
     
-    .btn-nas { background: var(--nas-red); color: #fff; padding: 14px 35px; border-radius: 4px; font-weight: 700; border: none; transition: 0.3s; text-decoration: none; }
+    .btn-nas { background: var(--nas-red); color: #fff; padding: 14px 35px; border-radius: 4px; font-weight: 700; border: none; transition: 0.3s; text-decoration: none; cursor: pointer; }
     .btn-nas:hover { background: var(--nas-blue); color: #fff; transform: translateY(-3px); }
 
     /* ===== UTILITIES ===== */
@@ -117,7 +117,6 @@
 <nav id="mainNav" class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href="#home">
-      <!-- Ensure Logo.png is in your folder -->
       <img src="Logo.png" alt="NAS Group Logo" onerror="this.src='https://via.placeholder.com/150x60?text=NAS+GROUP'">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -131,7 +130,6 @@
         <li class="nav-item"><a class="nav-link" href="#founder">Founder</a></li>
         <li class="nav-item"><a class="nav-link" href="#clients">Clients</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        <li class="nav-item"><a class="nav-link btn-nas ms-lg-3 text-white py-2" href="#contact">Book Now</a></li>
       </ul>
     </div>
   </div>
@@ -259,7 +257,7 @@
           </div>
           <div class="d-flex mb-3">
             <i class="fas fa-phone me-3 mt-1"></i>
-            <p>+971 (0) 50 000 0000</p>
+            <p>+91 9016281460</p>
           </div>
           <div class="d-flex mb-3">
             <i class="fas fa-envelope me-3 mt-1"></i>
@@ -268,13 +266,28 @@
         </div>
       </div>
       <div class="col-lg-7" data-aos="fade-left">
-        <form>
+        <form id="whatsappForm">
           <div class="row g-3">
-            <div class="col-md-6"><input type="text" class="form-control" placeholder="Your Name"></div>
-            <div class="col-md-6"><input type="email" class="form-control" placeholder="Your Email"></div>
-            <div class="col-12"><input type="text" class="form-control" placeholder="Service Needed (e.g. Full Detailing)"></div>
-            <div class="col-12"><textarea class="form-control" rows="5" placeholder="Your Message"></textarea></div>
-            <div class="col-12"><button type="submit" class="btn btn-nas w-100">Send Message</button></div>
+            <div class="col-md-6">
+                <input type="text" id="userName" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6">
+                <input type="email" id="userEmail" class="form-control" placeholder="Your Email" required>
+            </div>
+            <div class="col-12">
+                <input type="tel" id="userPhone" class="form-control" placeholder="Your Phone Number" required>
+            </div>
+            <div class="col-12">
+                <input type="text" id="userPackage" class="form-control" placeholder="Service Needed (e.g. Full Detailing)" required>
+            </div>
+            <div class="col-12">
+                <textarea id="userMessage" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-nas w-100">
+                    <i class="fab fa-whatsapp me-2"></i>Send Message via WhatsApp
+                </button>
+            </div>
           </div>
         </form>
       </div>
@@ -287,7 +300,6 @@
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-4">
-        <!-- Footer Logo Fix -->
         <img src="Logo.png" class="footer-logo" alt="NAS Group" onerror="this.src='https://via.placeholder.com/150x60?text=NAS+GROUP'">
         <p class="text-white-50">The Middle East's most trusted name in mobile car care. Bringing the shine to you since 2010.</p>
         <div class="d-flex gap-3 mt-4">
@@ -348,6 +360,34 @@
 
     $('#backTop').click(function(){
       window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+
+    // FIXED WHATSAPP LOGIC
+    $('#whatsappForm').on('submit', function(e) {
+      e.preventDefault();
+      
+      const companyNumber = "919016281460"; // Updated to your correct number
+      
+      // Capturing all form inputs
+      const name = $('#userName').val();
+      const email = $('#userEmail').val();
+      const phone = $('#userPhone').val(); 
+      const service = $('#userPackage').val();
+      const message = $('#userMessage').val();
+      
+      // Formatting the text for WhatsApp URL
+      const whatsappText = `*New Inquiry from NAS Website*%0A%0A` + 
+                           `*Name:* ${encodeURIComponent(name)}%0A` + 
+                           `*Email:* ${encodeURIComponent(email)}%0A` + 
+                           `*Phone:* ${encodeURIComponent(phone)}%0A` + 
+                           `*Service:* ${encodeURIComponent(service)}%0A` + 
+                           `*Message:* ${encodeURIComponent(message)}`;
+      
+      // The API link
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${companyNumber}&text=${whatsappText}`;
+      
+      // Executing the redirect
+      window.open(whatsappUrl, '_blank');
     });
   });
 </script>
